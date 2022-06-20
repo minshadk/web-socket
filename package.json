@@ -1,0 +1,23 @@
+{
+  "name": "web-socket",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/minshadk/web-socket.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/minshadk/web-socket/issues"
+  },
+  "homepage": "https://github.com/minshadk/web-socket#readme",
+  "dependencies": {
+    "nodemon": "^2.0.16",
+    "ws": "^8.8.0"
+  }
+}
