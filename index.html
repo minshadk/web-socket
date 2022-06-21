@@ -21,24 +21,22 @@
               </div>
                   `;
       }
-      //   function showMessage(text, isMine = false) {
-      //     document.getElementById("messages").innerHTML += `
-      //         <div class="message-row ${isMine ? "mine" : "theirs"}">
-      //             <div class="bubble">${text}</div>
-      //         </div>
-      //       `;
-      //   }
 
       const socket = new WebSocket("ws://localhost:8080");
 
+      // setting event listener on the message in the server
+      // e contain the message
       socket.addEventListener("message", (e) => {
+        // display the message form the server
         e.data.text().then(showMessage);
       });
 
       document.querySelector("form").onsubmit = (e) => {
         e.preventDefault();
         const input = document.querySelector("input");
+        // function call to the server on message
         socket.send(input.value);
+        // display the message form the client
         showMessage(input.value, true);
         // Clearing the form filed
         input.value = "";
