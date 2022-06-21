@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Socket Chat</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="messages"></div>
+    <form>
+      <input type="text" placeholder="Your message..." />
+    </form>
+
+    <script>
+      function showMessage(text, isMine = false) {
+        document.getElementById("messages").innerHTML += `
+              <div class="message-row ${isMine ? "mine" : "theirs"}">
+                  <div class="bubble">${text}</div>
+              </div>
+                  `;
+      }
+      //   function showMessage(text, isMine = false) {
+      //     document.getElementById("messages").innerHTML += `
+      //         <div class="message-row ${isMine ? "mine" : "theirs"}">
+      //             <div class="bubble">${text}</div>
+      //         </div>
+      //       `;
+      //   }
+
+      const socket = new WebSocket("ws://localhost:8080");
+
+      socket.addEventListener("message", (e) => {
+        e.data.text().then(showMessage);
+      });
+
+      document.querySelector("form").onsubmit = (e) => {
+        e.preventDefault();
+        const input = document.querySelector("input");
+        socket.send(input.value);
+        showMessage(input.value, true);
+        // Clearing the form filed
+        input.value = "";
+      };
+    </script>
+  </body>
+</html>
